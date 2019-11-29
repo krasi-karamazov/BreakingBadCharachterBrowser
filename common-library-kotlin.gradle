@@ -1,0 +1,10 @@
+import kpk.dev.buildsrc.CommonLibraryDependencies
+import kpk.dev.buildsrc.Libs
+
+apply plugin: 'kotlin'
+
+dependencies {
+    CommonLibraryDependencies.dependecies.each {
+        add(it.config.value, it.dependency)
+    }
+}

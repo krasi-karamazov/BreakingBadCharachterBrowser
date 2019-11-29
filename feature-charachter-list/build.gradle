@@ -1,0 +1,18 @@
+import kpk.dev.buildsrc.FeatureCharacterListDependecies
+
+apply from: "$rootDir/common-library-android.gradle"
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    FeatureCharacterListDependecies.dependencies.each {
+        if(it.isProject) {
+            add(it.config.value, project(it.dependency))
+        } else {
+            add(it.config.value, it.dependency)
+        }
+    }
+
+    FeatureCharacterListDependecies.testDependencies.each {
+        add(it.config.value, it.dependency)
+    }
+}

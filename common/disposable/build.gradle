@@ -1,0 +1,10 @@
+import kpk.dev.buildsrc.DisposableDependencies
+
+apply from: "$rootDir/common-library-kotlin.gradle"
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    DisposableDependencies.dependencies.each {
+        add(it.config.value, it.dependency)
+    }
+}

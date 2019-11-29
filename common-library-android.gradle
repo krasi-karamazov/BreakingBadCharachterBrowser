@@ -1,0 +1,31 @@
+import kpk.dev.buildsrc.AppVersion
+import kpk.dev.buildsrc.CommonLibraryDependencies
+import kpk.dev.buildsrc.DependenciesVersions
+import kpk.dev.buildsrc.Libs
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion DependenciesVersions.compileSdk
+
+    defaultConfig {
+        minSdkVersion DependenciesVersions.minSdk
+        targetSdkVersion DependenciesVersions.targetSdk
+        versionCode AppVersion.versionCode
+        versionName AppVersion.versionName
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+        }
+    }
+}
+
+dependencies {
+    CommonLibraryDependencies.dependecies.each {
+        add(it.config.value, it.dependency)
+    }
+}

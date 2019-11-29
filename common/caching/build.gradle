@@ -1,0 +1,10 @@
+import kpk.dev.buildsrc.CacheDependencies
+
+apply from: "$rootDir/common-library-android.gradle"
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    CacheDependencies.dependencies.each {
+        add(it.config.value, it.dependency)
+    }
+}

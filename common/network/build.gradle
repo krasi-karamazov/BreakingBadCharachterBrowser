@@ -1,0 +1,14 @@
+import kpk.dev.buildsrc.NetworkDependencies
+
+apply from: "$rootDir/common-library-kotlin.gradle"
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    NetworkDependencies.dependencies.each {
+        add(it.config.value, it.dependency)
+    }
+
+    NetworkDependencies.testDependencies.each {
+        add(it.config.value, it.dependency)
+    }
+}

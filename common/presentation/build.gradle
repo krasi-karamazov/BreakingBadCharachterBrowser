@@ -1,0 +1,14 @@
+import kpk.dev.buildsrc.PresentationDependencies
+
+apply from: "$rootDir/common-library-android.gradle"
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    PresentationDependencies.dependencies.each {
+        add(it.config.value, it.dependency)
+    }
+
+    PresentationDependencies.testDependencies.each {
+        add(it.config.value, it.dependency)
+    }
+}

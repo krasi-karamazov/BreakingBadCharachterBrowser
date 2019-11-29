@@ -1,0 +1,47 @@
+import kpk.dev.buildsrc.AppVersion
+import kpk.dev.buildsrc.ApplicationId
+import kpk.dev.buildsrc.DependenciesVersions
+import kpk.dev.buildsrc.MainAppDependencies
+
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion DependenciesVersions.compileSdk
+    defaultConfig {
+        applicationId ApplicationId.appId
+        minSdkVersion DependenciesVersions.minSdk
+        targetSdkVersion DependenciesVersions.targetSdk
+        versionCode AppVersion.versionCode
+        versionName AppVersion.versionName
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+dependencies {
+    MainAppDependencies.dependencies.each {
+        if(it.isProject) {
+            add(it.config.value, project(it.dependency))
+        }else{
+            add(it.config.value, it.dependency)
+        }
+    }
+
+    MainAppDependencies.testDependencies.each {
+        add(it.config.value, it.dependency)
+    }
+}
