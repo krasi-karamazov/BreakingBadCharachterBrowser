@@ -1,6 +1,5 @@
 package kpk.dev.feature_character_list.datasource.cache
 
-import android.util.Log
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
@@ -100,8 +99,7 @@ class CharactersOfflineDataSourceTest {
 
         val test = dataSource.putCharacter(remoteDataItem).test()
         verify(mockPaperCache).get(key)
-        Log.d("Test", "Test")
-        //test.assertValue(remoteDataItem)
+        test.assertValue(remoteDataItem)
     }
 
     @Test

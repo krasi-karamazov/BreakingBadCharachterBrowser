@@ -17,6 +17,7 @@ class BreakingBadApplication: Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
+        PaperCache.RxPaperInitializer.init(this)
         DaggerApplicationComponent.builder().application(this).build().inject(this)
     }
 }

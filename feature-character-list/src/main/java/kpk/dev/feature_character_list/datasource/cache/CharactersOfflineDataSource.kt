@@ -11,14 +11,20 @@ class CharactersOfflineDataSource @Inject constructor(val cache: PaperCache<List
 
     override fun getCharacterList(): Single<List<Character>> = cache.get(key)
 
-    override fun putCharacterList(characterList: List<Character>): Single<List<Character>> = cache.put(key, characterList)
+    override fun putCharacterList(characterList: List<Character>): Single<List<Character>> =
+        cache.put(key, characterList)
 
-    override fun getCharacter(id: Int): Single<Character> = cache.get(key).map { it -> it.first{ it.charId == id} }
+    override fun getCharacter(id: Int): Single<Character> =
+        cache.get(key).map { it -> it.first { it.charId == id } }
 
     override fun putCharacter(character: Character): Single<Character> = cache.get(key)
-        .map { it -> it.filter { it.charId == character.charId }.plus(character) }
-        .flatMap { list ->
-            putCharacterList(list)
-        }
-        .map { character }
+        .flatMap {
+            if (!it.contains(character)) {
+                val newList = mutableListOf<Character>()
+                it.map { char -> { newList.add(char) } }
+                newList.add(character)
+                putCharacterList(newList)
+            }
+            Single.just(character)
+        }.map { character }
 }

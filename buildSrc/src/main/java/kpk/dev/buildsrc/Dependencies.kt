@@ -14,8 +14,8 @@ object Modules {
 }
 
 object AppVersion {
-    val versionCode = 1
-    val versionName = "1.0"
+    const val versionCode = 1
+    const val versionName = "1.0"
 }
 
 object DependenciesVersions {
@@ -51,22 +51,22 @@ object DependenciesVersions {
     const val junit = "4.12"
     const val assertjCore = "3.12.2"
     const val mockitoKotlin = "2.1.0"
-    const val mockitoInline = "3.0.0"
+    const val mockitoInline = "3.2.0"
 }
 
 object Libs {
-    val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${DependenciesVersions.kotlin}"
-    val ktx = "androidx.core:core-ktx:${DependenciesVersions.ktx}"
-    val timber = "com.jakewharton.timber:timber:${DependenciesVersions.timber}"
-    val retrofit = "com.squareup.retrofit2:retrofit:${DependenciesVersions.retrofit}"
-    val rxjavaAdapter = "com.squareup.retrofit2:adapter-rxjava2:${DependenciesVersions.retrofit}"
-    val moshiConverter = "com.squareup.retrofit2:converter-moshi:${DependenciesVersions.retrofit}"
-    val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${DependenciesVersions.loggingInterceptor}"
-    val glide = "com.github.bumptech.glide:glide:${DependenciesVersions.glide}"
-    val glideCompiler = "com.github.bumptech.glide:compiler:${DependenciesVersions.glide}"
-    val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${DependenciesVersions.lifecycle}"
-    val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:${DependenciesVersions.lifecycle}"
-    val leakCanaryAndroid = "com.squareup.leakcanary:leakcanary-android:${DependenciesVersions.leakCanary}"
+    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${DependenciesVersions.kotlin}"
+    const val ktx = "androidx.core:core-ktx:${DependenciesVersions.ktx}"
+    const val timber = "com.jakewharton.timber:timber:${DependenciesVersions.timber}"
+    const val retrofit = "com.squareup.retrofit2:retrofit:${DependenciesVersions.retrofit}"
+    const val rxjavaAdapter = "com.squareup.retrofit2:adapter-rxjava2:${DependenciesVersions.retrofit}"
+    const val moshiConverter = "com.squareup.retrofit2:converter-moshi:${DependenciesVersions.retrofit}"
+    const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${DependenciesVersions.loggingInterceptor}"
+    const val glide = "com.github.bumptech.glide:glide:${DependenciesVersions.glide}"
+    const val glideCompiler = "com.github.bumptech.glide:compiler:${DependenciesVersions.glide}"
+    const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${DependenciesVersions.lifecycle}"
+    const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:${DependenciesVersions.lifecycle}"
+    const val leakCanaryAndroid = "com.squareup.leakcanary:leakcanary-android:${DependenciesVersions.leakCanary}"
     const val dagger = "com.google.dagger:dagger:${DependenciesVersions.dagger}"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${DependenciesVersions.dagger}"
     const val daggerAndroid = "com.google.dagger:dagger-android:${DependenciesVersions.dagger}"
@@ -80,17 +80,18 @@ object Libs {
 }
 
 object SupportLibs {
-    val appCompat = "androidx.appcompat:appcompat:${DependenciesVersions.appcompat}"
-    val design = "com.google.android.material:material:${DependenciesVersions.design}"
-    val cardview = "androidx.cardview:cardview:${DependenciesVersions.cardview}"
-    val recyclerview = "androidx.recyclerview:recyclerview:${DependenciesVersions.recyclerview}"
+    const val appCompat = "androidx.appcompat:appcompat:${DependenciesVersions.appcompat}"
+    const val design = "com.google.android.material:material:${DependenciesVersions.design}"
+    const val cardview = "androidx.cardview:cardview:${DependenciesVersions.cardview}"
+    const val recyclerview = "androidx.recyclerview:recyclerview:${DependenciesVersions.recyclerview}"
 }
 
 object TestLibs {
-    val junit = "junit:junit:${DependenciesVersions.junit}"
-    val assertjCore = "org.assertj:assertj-core:${DependenciesVersions.assertjCore}"
-    val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${DependenciesVersions.mockitoKotlin}"
-    val lifecycleTesting = "androidx.arch.core:core-testing:${DependenciesVersions.lifecycle}"
+    const val junit = "junit:junit:${DependenciesVersions.junit}"
+    const val assertjCore = "org.assertj:assertj-core:${DependenciesVersions.assertjCore}"
+    const val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${DependenciesVersions.mockitoKotlin}"
+    const val mockitoInline = "org.mockito:mockito-inline:${DependenciesVersions.mockitoInline}"
+    const val lifecycleTesting = "androidx.arch.core:core-testing:${DependenciesVersions.lifecycle}"
 }
 
 object MainAppDependencies {
@@ -149,7 +150,7 @@ object NetworkDependencies {
 
 object DisposableDependencies {
     val dependencies = listOf(
-        DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.rxJava),
+        DependecyConfiguration(ConfigurationType.API, Libs.rxJava),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.dagger),
         DependecyConfiguration(ConfigurationType.KAPT, Libs.daggerCompiler),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.javaXInject)
@@ -178,6 +179,7 @@ object FeatureCharacterListDependecies {
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Modules.presentation, true),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Modules.network, true),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Modules.caching, true),
+        DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Modules.disposable, true),
 
         // Support Libs
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.lifecycleExtensions),
@@ -204,6 +206,7 @@ object FeatureCharacterListDependecies {
     val testDependencies = listOf(
         DependecyConfiguration(ConfigurationType.TEST_IMPLEMENTATION, TestLibs.junit),
         DependecyConfiguration(ConfigurationType.TEST_IMPLEMENTATION, TestLibs.mockitoKotlin),
+        DependecyConfiguration(ConfigurationType.TEST_IMPLEMENTATION, TestLibs.mockitoInline),
         DependecyConfiguration(ConfigurationType.TEST_IMPLEMENTATION, TestLibs.lifecycleTesting),
         DependecyConfiguration(ConfigurationType.TEST_IMPLEMENTATION, TestLibs.assertjCore)
     )

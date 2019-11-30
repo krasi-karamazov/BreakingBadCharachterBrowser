@@ -5,14 +5,11 @@ import com.pacoworks.rxpaper2.RxPaperBook
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import javax.inject.Named
-import javax.inject.Singleton
 
-@Singleton
-class PaperCache<T> @Inject constructor(@Named("app_context") context: Context) {
+class PaperCache<T> @Inject constructor() {
 
-    init {
-        RxPaperBook.init(context)
+    object RxPaperInitializer {
+        fun init(context: Context) = RxPaperBook.init(context)
     }
 
     private val book: RxPaperBook = RxPaperBook.with(Schedulers.io())
