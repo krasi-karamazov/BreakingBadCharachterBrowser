@@ -10,7 +10,7 @@ object Modules {
     const val presentation = ":common:presentation"
     const val disposable = ":common:disposable"
     const val caching = ":common:caching"
-    const val feature_character_list = ":feature-charachter-list"
+    const val feature_character_list = ":feature-character-list"
 }
 
 object AppVersion {
@@ -90,7 +90,6 @@ object TestLibs {
     val junit = "junit:junit:${DependenciesVersions.junit}"
     val assertjCore = "org.assertj:assertj-core:${DependenciesVersions.assertjCore}"
     val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${DependenciesVersions.mockitoKotlin}"
-    val mockitoInline = "org.mockito:mockito-inline:${DependenciesVersions.mockitoInline}"
     val lifecycleTesting = "androidx.arch.core:core-testing:${DependenciesVersions.lifecycle}"
 }
 
@@ -98,6 +97,8 @@ object MainAppDependencies {
     val dependencies = listOf(
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Modules.network, true),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Modules.disposable, true),
+        DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Modules.caching, true),
+        DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Modules.feature_character_list, true),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, SupportLibs.appCompat),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.dagger),
         DependecyConfiguration(ConfigurationType.KAPT, Libs.daggerCompiler),
@@ -133,7 +134,7 @@ object NetworkDependencies {
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.dagger),
         DependecyConfiguration(ConfigurationType.KAPT, Libs.daggerCompiler),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.javaXInject),
-        DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.retrofit),
+        DependecyConfiguration(ConfigurationType.API, Libs.retrofit),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.rxjavaAdapter),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.moshiConverter),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.loggingInterceptor),
@@ -158,7 +159,10 @@ object DisposableDependencies {
 object CacheDependencies {
     val dependencies = listOf(
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.rxJava),
-        DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.rxPaper)
+        DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.rxPaper),
+        DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.dagger),
+        DependecyConfiguration(ConfigurationType.KAPT, Libs.daggerCompiler),
+        DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.javaXInject)
     )
 }
 
@@ -200,7 +204,7 @@ object FeatureCharacterListDependecies {
     val testDependencies = listOf(
         DependecyConfiguration(ConfigurationType.TEST_IMPLEMENTATION, TestLibs.junit),
         DependecyConfiguration(ConfigurationType.TEST_IMPLEMENTATION, TestLibs.mockitoKotlin),
-        DependecyConfiguration(ConfigurationType.TEST_IMPLEMENTATION, TestLibs.mockitoInline),
-        DependecyConfiguration(ConfigurationType.TEST_IMPLEMENTATION, TestLibs.lifecycleTesting)
+        DependecyConfiguration(ConfigurationType.TEST_IMPLEMENTATION, TestLibs.lifecycleTesting),
+        DependecyConfiguration(ConfigurationType.TEST_IMPLEMENTATION, TestLibs.assertjCore)
     )
 }

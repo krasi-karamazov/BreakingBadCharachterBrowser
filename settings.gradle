@@ -1,4 +1,4 @@
-include ':feature-charachter-list'
+include ':feature-character-list'
 import kpk.dev.buildsrc.Modules
 
 include Modules.app, Modules.caching, Modules.disposable, Modules.network, Modules.presentation, Modules.feature_character_list

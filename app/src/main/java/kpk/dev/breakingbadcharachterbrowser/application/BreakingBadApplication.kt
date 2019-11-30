@@ -6,6 +6,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import kpk.dev.breakingbadcharachterbrowser.di.DaggerApplicationComponent
+import kpk.dev.caching.PaperCache
 import javax.inject.Inject
 
 class BreakingBadApplication: Application(), HasActivityInjector {

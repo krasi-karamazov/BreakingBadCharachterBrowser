@@ -1,6 +1,8 @@
 package kpk.dev.caching
 
-class InMemoryCache<T> {
+import javax.inject.Inject
+
+class InMemoryCache<T> @Inject constructor() {
     private val cacheMap: MutableMap<String, T> = mutableMapOf()
 
     fun get(key: String): T = cacheMap.getValue(key)
