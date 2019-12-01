@@ -4,9 +4,8 @@ import android.content.Context
 import com.pacoworks.rxpaper2.RxPaperBook
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
 
-class PaperCache<T> @Inject constructor() {
+class PaperCache<T> {
 
     object RxPaperInitializer {
         fun init(context: Context) = RxPaperBook.init(context)

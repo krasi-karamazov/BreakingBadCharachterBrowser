@@ -1,9 +1,9 @@
 package kpk.dev.feature_character_list.domain.usecase
 
-import kpk.dev.feature_character_list.data.repository.CharacterRepository
+import kpk.dev.feature_character_list.domain.repository.ICharacterRepository
 import javax.inject.Inject
 
-class GetCharactersListUseCase @Inject constructor(private val characterRepository: CharacterRepository) {
+class GetCharactersListUseCase @Inject constructor(private val characterRepository: ICharacterRepository) {
 
     fun getCharacterList(refreshData: Boolean) = characterRepository.getCharacterList(refreshData)
 }

@@ -16,3 +16,17 @@ data class CharacterItem(
     val status: String)
 
 fun List<Character>.mapToPresentation(): List<CharacterItem> = map { CharacterItem(it.appearance, it.betterCallSaulAppearance, it.birthday, it.category, it.charId, it.img, it.name, it.nickname, it.occupation, it.portrayed, it.status) }
+
+fun Character.mapToPresentation(): CharacterItem = CharacterItem(
+    appearance,
+    betterCallSaulAppearance,
+    birthday,
+    category,
+    charId,
+    img,
+    name,
+    nickname,
+    occupation,
+    portrayed,
+    status
+)

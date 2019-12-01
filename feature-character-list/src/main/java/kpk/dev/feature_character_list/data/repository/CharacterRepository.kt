@@ -1,13 +1,15 @@
 package kpk.dev.feature_character_list.data.repository
 
 import io.reactivex.Single
-import kpk.dev.feature_character_list.datasource.cache.CharactersOfflineDataSource
-import kpk.dev.feature_character_list.datasource.remote.CharactersRemoteDataSource
+import kpk.dev.feature_character_list.data.datasource.ICharactersOfflineDataSource
+import kpk.dev.feature_character_list.data.datasource.ICharactersRemoteDataSource
 import kpk.dev.feature_character_list.domain.model.Character
 import kpk.dev.feature_character_list.domain.repository.ICharacterRepository
-import javax.inject.Inject
 
-class CharacterRepository @Inject constructor(val charactersRemoteDataSource: CharactersRemoteDataSource, val charactersOfflineDataSource: CharactersOfflineDataSource): ICharacterRepository {
+class CharacterRepository(
+    private val charactersRemoteDataSource: ICharactersRemoteDataSource,
+    private val charactersOfflineDataSource: ICharactersOfflineDataSource
+) : ICharacterRepository {
     override fun getCharacterList(refreshData: Boolean): Single<List<Character>> {
         return when(refreshData) {
             true -> {

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
+import kpk.dev.feature_character_list.presentation.characterdetails.CharacterDetailsViewModel
 import kpk.dev.feature_character_list.presentation.characterlist.CharacterListViewModel
 import kpk.dev.feature_character_list.presentation.viewmodelfactory.ViewModelFactory
 import kpk.dev.presentation.di.ViewModelKey
@@ -20,5 +21,8 @@ abstract class FeatureCharacterListViewModelModule {
     @ViewModelKey(CharacterListViewModel::class)
     internal abstract fun bindCharacterListViewModel(viewModel: CharacterListViewModel): ViewModel
 
-    //Add more ViewModels here
+    @Binds
+    @IntoMap
+    @ViewModelKey(CharacterDetailsViewModel::class)
+    internal abstract fun bindCharacterDetailsViewModel(viewModel: CharacterDetailsViewModel): ViewModel
 }

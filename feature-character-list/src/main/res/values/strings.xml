@@ -1,5 +1,14 @@
 <resources>
-    <string name="app_name">feature-charachter-list</string>
     <string name="try_again">Try again</string>
+    <string name="go_back">Go back</string>
     <string name="cannot_download_data">Cannot download data</string>
+    <string name="app_title">Breaking Bad character explorer</string>
+    <string name="invalid_char_id">Invalid character id</string>
+
+    <string name="nickname">Nickname: %1$s</string>
+    <string name="birthday">Birthday: %1$s</string>
+    <string name="occupation">Occupation: %1$s</string>
+    <string name="status">Status: %1$s</string>
+    <string name="appearances">Appears in season: %1$s</string>
+    <string name="portrayed">Portrayed by: %1$s</string>
 </resources>
