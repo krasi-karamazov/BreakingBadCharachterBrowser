@@ -1,5 +1,6 @@
 package kpk.dev.feature_character_list.presentation.characterlist
 
+import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +18,7 @@ class CharacterListActivity: BaseActivity() {
 
     private lateinit var viewModel: CharacterListViewModel
 
-    private lateinit var snackBar:Snackbar
+    private var snackBar:Snackbar? = null
 
     private val charactersRecyclerView: RecyclerView by lazy {
         findViewById<RecyclerView>(R.id.rv_characters)
@@ -26,6 +27,11 @@ class CharacterListActivity: BaseActivity() {
         CharactersAdapter {
             //start activity
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        
+        super.onCreate(savedInstanceState)
     }
 
     override fun getLayoutId(): Int = R.layout.activity_character_list
@@ -46,12 +52,16 @@ class CharacterListActivity: BaseActivity() {
     private fun downloadData() {
         viewModel.getCharacterList(true).observe(this, Observer {
             when (it.resourceState) {
-                ResourceState.LOADING -> showProgress()
+                ResourceState.LOADING -> {
+                    hideError()
+                    showProgress()
+                }
                 ResourceState.FAILURE -> {
                     hideProgress()
                     displayError(it.message)
                 }
                 ResourceState.SUCCESS -> {
+                    hideError()
                     hideProgress()
                     charactersAdapter.updateData(it.data)
                 }
@@ -63,7 +73,15 @@ class CharacterListActivity: BaseActivity() {
         snackBar =  Snackbar.make(findViewById(R.id.main_container), msg ?: getString(R.string.cannot_download_data), Snackbar.LENGTH_INDEFINITE)
             .setAction(getString(R.string.try_again)) {downloadData()}
 
-        snackBar.show()
+        snackBar?.show()
+    }
+
+    private fun hideError() {
+        snackBar?.let { snackbar ->
+            if(snackbar.isShown) {
+                snackbar.dismiss()
+            }
+        }
     }
 
 }
