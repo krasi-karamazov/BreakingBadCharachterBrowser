@@ -1,6 +1,9 @@
 package kpk.dev.feature_character_list.presentation.characterlist
 
 import android.content.Intent
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -71,5 +74,27 @@ class CharacterListActivity: BaseActivity() {
                 }
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        val searchItem: MenuItem? = menu?.findItem(R.id.action_search)
+        val searchView: SearchView? = searchItem?.actionView as SearchView
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (!searchView.isIconified) {
+                    searchView.isIconified = true
+                }
+                searchItem.collapseActionView()
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                TODO("Handle text change and search for string in name")
+                return false
+            }
+
+        })
+        return super.onCreateOptionsMenu(menu)
     }
 }

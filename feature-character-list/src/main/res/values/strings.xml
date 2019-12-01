@@ -11,4 +11,7 @@
     <string name="status">Status: %1$s</string>
     <string name="appearances">Appears in season: %1$s</string>
     <string name="portrayed">Portrayed by: %1$s</string>
+    <string name="search">Search</string>
+    <string name="filter">Filter</string>
+    <string name="filter_list">Filter list</string>
 </resources>
