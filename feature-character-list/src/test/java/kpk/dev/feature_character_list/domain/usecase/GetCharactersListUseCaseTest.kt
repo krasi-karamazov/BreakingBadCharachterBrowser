@@ -5,17 +5,15 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Single
 import kpk.dev.feature_character_list.character
-import kpk.dev.feature_character_list.domain.repository.ICharacterRepository
+import kpk.dev.feature_character_list.data.repository.CharacterRepository
 import org.junit.Before
-
-import org.junit.Assert.*
 import org.junit.Test
 
 class GetCharactersListUseCaseTest {
 
     private lateinit var useCase: GetCharactersListUseCase
 
-    private val repository: ICharacterRepository = mock()
+    private val repository: CharacterRepository = mock()
 
     private val dataItem = character.copy(name = "Brockie Online")
     private val dataList = listOf(dataItem)

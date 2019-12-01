@@ -1,5 +1,6 @@
 package kpk.dev.feature_character_list.presentation.characterlist
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -16,7 +17,7 @@ import javax.inject.Inject
 class CharacterListViewModel @Inject constructor(val charactersListUseCase: GetCharactersListUseCase, disposable: CompositeDisposable): BaseViewModel(disposable) {
     private val charactersData = MutableLiveData<Resource<List<CharacterItem>>>()
 
-    fun getCharacterList(refresh: Boolean): MutableLiveData<Resource<List<CharacterItem>>> {
+    fun getCharacterList(refresh: Boolean): LiveData<Resource<List<CharacterItem>>> {
         compositeDisposable.add(charactersListUseCase.getCharacterList(refresh)
             .doOnSubscribe{ charactersData.setLoading() }
             .subscribeOn(Schedulers.io())

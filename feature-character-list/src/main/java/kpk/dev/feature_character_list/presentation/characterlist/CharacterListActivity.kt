@@ -1,8 +1,12 @@
 package kpk.dev.feature_character_list.presentation.characterlist
 
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kpk.dev.feature_character_list.R
 import kpk.dev.feature_character_list.presentation.base.BaseActivity
 import kpk.dev.feature_character_list.presentation.viewmodelfactory.ViewModelFactory
+import kpk.dev.presentation.ResourceState
 import javax.inject.Inject
 
 class CharacterListActivity: BaseActivity() {
@@ -12,11 +16,41 @@ class CharacterListActivity: BaseActivity() {
 
     private lateinit var viewModel: CharacterListViewModel
 
+    private val charactersRecyclerView: RecyclerView by lazy {
+        findViewById<RecyclerView>(R.id.rv_characters)
+    }
+    private val charactersAdapter: CharactersAdapter by lazy {
+        CharactersAdapter {
+            //start activity
+        }
+    }
+
     override fun getLayoutId(): Int = R.layout.activity_character_list
 
     override fun init() {
         viewModel = vmFactory.get()
-        viewModel.getCharacterList(true)
+        progressBar = findViewById(R.id.pb_char_list)
+
+        charactersRecyclerView.apply {
+            val rvLayoutManager =
+                GridLayoutManager(this@CharacterListActivity, 2, GridLayoutManager.VERTICAL, false)
+            layoutManager = rvLayoutManager
+            adapter = charactersAdapter
+        }
+
+        viewModel.getCharacterList(true).observe(this, Observer {
+            when (it.resourceState) {
+                ResourceState.LOADING -> showProgress()
+                ResourceState.FAILURE -> {
+                    hideProgress()
+                    
+                }
+                ResourceState.SUCCESS -> {
+                    hideProgress()
+                    charactersAdapter.updateData(it.data)
+                }
+            }
+        })
     }
 
 }

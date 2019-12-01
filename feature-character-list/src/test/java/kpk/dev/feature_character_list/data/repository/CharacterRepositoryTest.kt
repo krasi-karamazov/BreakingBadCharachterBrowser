@@ -5,18 +5,17 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Single
 import kpk.dev.feature_character_list.character
-import kpk.dev.feature_character_list.data.datasource.ICharactersOfflineDataSource
-import kpk.dev.feature_character_list.data.datasource.ICharactersRemoteDataSource
+import kpk.dev.feature_character_list.datasource.cache.CharactersOfflineDataSource
+import kpk.dev.feature_character_list.datasource.remote.CharactersRemoteDataSource
 import org.junit.Before
-
 import org.junit.Test
 
 class CharacterRepositoryTest {
 
     private lateinit var repository: CharacterRepository
 
-    private val mockCharacterRemoteDataSource: ICharactersRemoteDataSource = mock()
-    private val mockCharacterOfflineDataSource: ICharactersOfflineDataSource = mock()
+    private val mockCharacterRemoteDataSource: CharactersRemoteDataSource = mock()
+    private val mockCharacterOfflineDataSource: CharactersOfflineDataSource = mock()
 
     private val cachedDataItem = character.copy(name = "Brockie offline")
     private val remoteDataItem = character.copy(name = "Brockie online")

@@ -24,10 +24,11 @@ object DependenciesVersions {
     const val minSdk = 21
     const val targetSdk = 29
 
-    const val appcompat = "1.0.2"
+    const val appcompat = "1.1.0"
     const val design = "1.0.0"
     const val cardview = "1.0.0"
     const val recyclerview = "1.0.0"
+    const val constraintLayout = "2.0.0-beta2"
 
     const val ktx = "1.0.0-alpha1"
 
@@ -36,7 +37,7 @@ object DependenciesVersions {
     const val rxjava = "2.2.15"
     const val rxkotlin = "2.4.0"
     const val rxPaper = "1.4.0"
-    const val retrofit = "2.6.0"
+    const val retrofit = "2.6.2"
     const val loggingInterceptor = "4.0.0"
     const val glide = "4.9.0"
     const val okHttp = "4.2.1"
@@ -44,7 +45,7 @@ object DependenciesVersions {
     const val dagger = "2.23.1"
     const val javaxInject = "1"
 
-    const val moshi = "1.8.0"
+    const val moshi = "1.9.2"
     const val lifecycle = "2.0.0"
     const val leakCanary = "2.0-alpha-2"
 
@@ -77,6 +78,9 @@ object Libs {
     const val rxJava = "io.reactivex.rxjava2:rxjava:${DependenciesVersions.rxjava}"
     const val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${DependenciesVersions.rxkotlin}"
     const val rxPaper = "com.github.pakoito:RxPaper2:${DependenciesVersions.rxPaper}"
+
+    const val moshi = "com.squareup.moshi:moshi:${DependenciesVersions.moshi}"
+    const val moshiCodeGen = "com.squareup.moshi:moshi-kotlin-codegen:${DependenciesVersions.moshi}"
 }
 
 object SupportLibs {
@@ -84,6 +88,8 @@ object SupportLibs {
     const val design = "com.google.android.material:material:${DependenciesVersions.design}"
     const val cardview = "androidx.cardview:cardview:${DependenciesVersions.cardview}"
     const val recyclerview = "androidx.recyclerview:recyclerview:${DependenciesVersions.recyclerview}"
+    const val constraintLayout =
+        "androidx.constraintlayout:constraintlayout:${DependenciesVersions.constraintLayout}"
 }
 
 object TestLibs {
@@ -185,6 +191,7 @@ object FeatureCharacterListDependecies {
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.lifecycleExtensions),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, SupportLibs.design),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, SupportLibs.cardview),
+        DependecyConfiguration(ConfigurationType.IMPLEMENTATION, SupportLibs.constraintLayout),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, SupportLibs.appCompat),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, SupportLibs.recyclerview),
         //Dagger
@@ -200,7 +207,9 @@ object FeatureCharacterListDependecies {
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.rxKotlin),
 
         //Misc
-        DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.moshiConverter)
+        DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.moshiConverter),
+        DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.moshi),
+        DependecyConfiguration(ConfigurationType.KAPT, Libs.moshiCodeGen)
     )
 
     val testDependencies = listOf(
