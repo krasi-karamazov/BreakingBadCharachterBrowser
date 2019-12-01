@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">feature-charachter-list</string>
+    <string name="try_again">Try again</string>
+    <string name="cannot_download_data">Cannot download data</string>
 </resources>
