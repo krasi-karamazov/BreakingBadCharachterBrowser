@@ -42,6 +42,6 @@
         android:src="@drawable/ic_filter_list_white_24dp"
         android:contentDescription="@string/filter_list"
         android:layout_margin="16dp"
-        style="@style/Widget.MaterialComponents.FloatingActionButton" />
+        style="@style/Widget.Design.FloatingActionButton" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

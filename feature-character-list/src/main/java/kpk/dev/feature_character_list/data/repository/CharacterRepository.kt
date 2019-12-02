@@ -41,4 +41,9 @@ class CharacterRepository(
         return charactersOfflineDataSource.searchForCharactersByName(name)
             .onErrorResumeNext(getCharacterList(false).toObservable())
     }
+
+    override fun filterCharactersBySeasonAppearance(appearances: List<Int>): Observable<List<Character>> {
+        return charactersOfflineDataSource.filterCharactersBySeasonApperances(appearances)
+            .onErrorResumeNext(getCharacterList(false).toObservable())
+    }
 }

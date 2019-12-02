@@ -14,4 +14,9 @@
     <string name="search">Search</string>
     <string name="filter">Filter</string>
     <string name="filter_list">Filter list</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="filter_title">Filter characters by season appearance</string>
+    <string name="search_error">An error occurred while searching</string>
+    <string name="filter_error">An error occurred while filtering</string>
 </resources>

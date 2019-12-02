@@ -8,4 +8,5 @@ interface ICharacterRepository {
     fun getCharacterList(refreshData: Boolean): Single<List<Character>>
     fun getCharacter(id: Int, refreshData: Boolean): Single<Character>
     fun searchForCharactersByName(name: String): Observable<List<Character>>
+    fun filterCharactersBySeasonAppearance(appearances: List<Int>): Observable<List<Character>>
 }

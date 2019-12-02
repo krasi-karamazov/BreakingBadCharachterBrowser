@@ -1,19 +1,18 @@
 package kpk.dev.breakingbadcharachterbrowser.application
 
-import android.app.Activity
 import android.app.Application
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
+import dagger.android.HasAndroidInjector
 import kpk.dev.breakingbadcharachterbrowser.di.DaggerApplicationComponent
 import kpk.dev.caching.PaperCache
 import javax.inject.Inject
 
-class BreakingBadApplication: Application(), HasActivityInjector {
+class BreakingBadApplication : Application(), HasAndroidInjector {
     @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
-    override fun activityInjector(): AndroidInjector<Activity> = dispatchingAndroidInjector
+    override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
     override fun onCreate() {
         super.onCreate()

@@ -41,7 +41,7 @@ object DependenciesVersions {
     const val glide = "4.10.0"
     const val okHttp = "4.2.2"
 
-    const val dagger = "2.25.2"
+    const val dagger = "2.23.1"
     const val javaxInject = "1"
 
     const val moshi = "1.9.2"
@@ -102,7 +102,7 @@ object MainAppDependencies {
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Modules.network, true),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Modules.disposable, true),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Modules.caching, true),
-        DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Modules.feature_character_list, true),
+        DependecyConfiguration(ConfigurationType.API, Modules.feature_character_list, true),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, SupportLibs.appCompat),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.dagger),
         DependecyConfiguration(ConfigurationType.KAPT, Libs.daggerCompiler),
@@ -190,7 +190,6 @@ object FeatureCharacterListDependecies {
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, SupportLibs.cardview),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, SupportLibs.constraintLayout),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, SupportLibs.appCompat),
-        DependecyConfiguration(ConfigurationType.IMPLEMENTATION, SupportLibs.recyclerview),
         //Dagger
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.dagger),
         DependecyConfiguration(ConfigurationType.KAPT, Libs.daggerCompiler),

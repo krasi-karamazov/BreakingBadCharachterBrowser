@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kpk.dev.feature_character_list.domain.usecase.FilterCharactersBySeasonAppearanceUseCase
 import kpk.dev.feature_character_list.domain.usecase.GetCharactersListUseCase
 import kpk.dev.feature_character_list.domain.usecase.SearchForCharacterByNameUseCase
 import kpk.dev.feature_character_list.presentation.base.BaseViewModel
@@ -18,18 +19,25 @@ import javax.inject.Inject
 class CharacterListViewModel @Inject constructor(
     private val charactersListUseCase: GetCharactersListUseCase,
     private val searchForCharacterByName: SearchForCharacterByNameUseCase,
+    private val filterCharactersBySeasonAppearanceUseCase: FilterCharactersBySeasonAppearanceUseCase,
     disposable: CompositeDisposable
 ) : BaseViewModel(disposable) {
     private val charactersData = MutableLiveData<Resource<List<CharacterItem>>>()
 
     private val searchData = MutableLiveData<Resource<List<CharacterItem>>>()
 
+    private val filterData = MutableLiveData<Resource<List<CharacterItem>>>()
+
+    var appliedFilter = BooleanArray(5)
+
     fun getCharacterList(refresh: Boolean): LiveData<Resource<List<CharacterItem>>> {
         compositeDisposable.add(charactersListUseCase.getCharacterList(refresh)
-            .doOnSubscribe{ charactersData.setLoading() }
+            .doOnSubscribe { charactersData.setLoading() }
             .subscribeOn(Schedulers.io())
             .map { it.mapToPresentation() }
-            .subscribe({ charactersData.setSuccess(it) }, { charactersData.setFailure(it.message) })
+            .subscribe(
+                { charactersData.setSuccess(it) },
+                { charactersData.setFailure(it.message) })
         )
         return charactersData
     }
@@ -41,5 +49,16 @@ class CharacterListViewModel @Inject constructor(
             .subscribe({ searchData.setSuccess(it) }, { searchData.setFailure(it.message) })
         )
         return searchData
+    }
+
+    fun filterCharactersBySeasonAppearance(appearances: List<Int>): LiveData<Resource<List<CharacterItem>>> {
+        compositeDisposable.add(filterCharactersBySeasonAppearanceUseCase.filterCharactersBySeasonAppearance(
+            appearances
+        )
+            .subscribeOn(Schedulers.io())
+            .map { it.mapToPresentation() }
+            .subscribe({ filterData.setSuccess(it) }, { filterData.setFailure(it.message) })
+        )
+        return filterData
     }
 }

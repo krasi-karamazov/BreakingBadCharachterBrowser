@@ -1,12 +1,14 @@
 package kpk.dev.feature_character_list.presentation.characterlist
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kpk.dev.feature_character_list.R
 import kpk.dev.feature_character_list.presentation.base.BaseActivity
 import kpk.dev.feature_character_list.presentation.characterdetails.CharacterDetailsActivity
@@ -28,10 +30,26 @@ class CharacterListActivity: BaseActivity() {
         findViewById<RecyclerView>(R.id.rv_characters)
     }
 
+    private val filterFab: FloatingActionButton by lazy {
+        findViewById<FloatingActionButton>(R.id.fab)
+    }
+
+    private lateinit var seasonsArray: IntArray
+
     private val searchObserver = Observer<Resource<List<CharacterItem>>> {
         when (it.resourceState) {
+            ResourceState.FAILURE -> displayError(getString(R.string.search_error), null) {}
+            ResourceState.SUCCESS -> {
+                hideError()
+                charactersAdapter.updateData(it.data)
+            }
+        }
+    }
+
+    private val filterObserver = Observer<Resource<List<CharacterItem>>> {
+        when (it.resourceState) {
             ResourceState.FAILURE -> {
-                displayError(it.message, getString(R.string.try_again)) { downloadData() }
+                displayError(getString(R.string.filter_error), null) {}
             }
             ResourceState.SUCCESS -> {
                 hideError()
@@ -56,6 +74,8 @@ class CharacterListActivity: BaseActivity() {
         setToolBar(findViewById(R.id.toolbar))
         setTitle(getString(R.string.app_title))
 
+        seasonsArray = resources.getIntArray(R.array.seasonsInts)
+
         viewModel = vmFactory.get()
         progressBar = findViewById(R.id.pb_char_list)
 
@@ -69,6 +89,29 @@ class CharacterListActivity: BaseActivity() {
             adapter = charactersAdapter
         }
         downloadData()
+
+        filterFab.setOnClickListener {
+            val args = Bundle()
+            if (viewModel.appliedFilter.isNotEmpty()) {
+                args.putBooleanArray(FilterDialogFragment.EXTRA_SELECTIONS, viewModel.appliedFilter)
+            }
+            FilterDialogFragment.getInstance(args) {
+                val appearanceList = mutableListOf<Int>()
+                if (it.size() > 0) {
+                    for (i in 0 until it.size()) {
+                        viewModel.appliedFilter[it.keyAt(i)] = it.valueAt(i)
+                        if (it.valueAt(i)) {
+                            appearanceList.add(seasonsArray[it.keyAt(i)])
+                        }
+                    }
+                } else {
+                    viewModel.appliedFilter.fill(false)
+                }
+                viewModel.filterCharactersBySeasonAppearance(appearanceList)
+                    .observe(this@CharacterListActivity, filterObserver)
+            }
+                .show(supportFragmentManager, FilterDialogFragment.TAG)
+        }
     }
 
     private fun downloadData() {
@@ -101,24 +144,29 @@ class CharacterListActivity: BaseActivity() {
                     searchView.isIconified = true
                 }
                 searchItem.collapseActionView()
+                executeSearch(query)
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let {
-                    if (it.length >= 2) {
-                        viewModel.searchForCharacterByName(it)
-                            .observe(this@CharacterListActivity, searchObserver)
-                    } else {
-                        if (it.isEmpty() || it.length == 1) {
-                            downloadData()
-                        }
-                    }
-                }
+                executeSearch(newText)
                 return false
             }
 
         })
         return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun executeSearch(query: String?) {
+        query?.let {
+            if (it.length >= 2) {
+                viewModel.searchForCharacterByName(it)
+                    .observe(this@CharacterListActivity, searchObserver)
+            } else {
+                if (it.isEmpty() || it.length == 1) {
+                    downloadData()
+                }
+            }
+        }
     }
 }
