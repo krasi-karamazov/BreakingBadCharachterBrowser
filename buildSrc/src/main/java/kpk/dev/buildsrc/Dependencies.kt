@@ -27,7 +27,6 @@ object DependenciesVersions {
     const val appcompat = "1.1.0"
     const val design = "1.2.0-alpha02"
     const val cardview = "1.0.0"
-    const val recyclerview = "1.1.0"
     const val constraintLayout = "2.0.0-beta2"
 
     const val ktx = "1.2.0-rc01"
@@ -84,7 +83,6 @@ object SupportLibs {
     const val appCompat = "androidx.appcompat:appcompat:${DependenciesVersions.appcompat}"
     const val design = "com.google.android.material:material:${DependenciesVersions.design}"
     const val cardview = "androidx.cardview:cardview:${DependenciesVersions.cardview}"
-    const val recyclerview = "androidx.recyclerview:recyclerview:${DependenciesVersions.recyclerview}"
     const val constraintLayout =
         "androidx.constraintlayout:constraintlayout:${DependenciesVersions.constraintLayout}"
 }
