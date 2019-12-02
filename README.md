@@ -1,4 +1,4 @@
-# Breaking Bad Character browse
+# Breaking Bad Character browser
 A simple client for the Breaking Bad API. The purpose of this application is to display data about all characters in the Breaking Bad series
 
 The app is modularized and is using the Clean architecture for code structuring. Communication between components is implemented using the MVVM architecture.
