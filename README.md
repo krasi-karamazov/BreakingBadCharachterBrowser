@@ -25,7 +25,7 @@ Below the Requirements are listed some TODOs that given time I would like to wor
 
 ∙ Work a bit on readability on some portions of the code
 
-∙ Implement moreextensive unit testing. Right now, because of time constraints, the unit tests are concentrated in the model and domain portions, which makes sense, but it would be nessessary to have unit tests for the view models when they become a bit more logic/feature rich
+∙ Implement more extensive unit testing. Right now, because of time constraints, the unit tests are concentrated in the model and domain portions, which makes sense, but it would be necessary to have unit tests for the view models when they become a bit more logic/feature rich
 
 ∙ Spend more time manually testing
 
