@@ -1,4 +1,4 @@
-package kpk.dev.presentation.di
+package kpk.dev.feature_character_list.presentation.di
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

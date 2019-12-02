@@ -4,7 +4,6 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import com.google.android.material.snackbar.Snackbar
 import kpk.dev.feature_character_list.R
 import kpk.dev.feature_character_list.presentation.base.BaseActivity
 import kpk.dev.feature_character_list.presentation.viewmodelfactory.ViewModelFactory
@@ -22,8 +21,6 @@ class CharacterDetailsActivity : BaseActivity() {
     internal lateinit var vmFactory: ViewModelFactory
 
     private lateinit var viewModel: CharacterDetailsViewModel
-
-    private var snackBar: Snackbar? = null
     private val characterImage: ImageView by lazy {
         findViewById<ImageView>(R.id.iv_char_big_image)
     }

@@ -10,7 +10,7 @@ interface ICharactersOfflineDataSource {
 
     fun getCharacter(id: Int): Single<Character>
     fun searchForCharactersByName(name: String): Observable<List<Character>>
-    fun filterCharactersBySeasonApperances(appearances: List<Int>): Single<Character>
+    fun filterCharactersBySeasonApperances(appearances: List<Int>): Observable<List<Character>>
     fun putCharacter(character: Character): Single<Character>
 }
 

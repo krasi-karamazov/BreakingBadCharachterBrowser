@@ -8,7 +8,6 @@ import dagger.multibindings.IntoMap
 import kpk.dev.feature_character_list.presentation.characterdetails.CharacterDetailsViewModel
 import kpk.dev.feature_character_list.presentation.characterlist.CharacterListViewModel
 import kpk.dev.feature_character_list.presentation.viewmodelfactory.ViewModelFactory
-import kpk.dev.presentation.di.ViewModelKey
 
 @Module
 abstract class FeatureCharacterListViewModelModule {

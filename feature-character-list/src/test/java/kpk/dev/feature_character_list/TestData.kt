@@ -2,9 +2,6 @@ package kpk.dev.feature_character_list
 
 import kpk.dev.feature_character_list.datasource.model.CharacterEntity
 import kpk.dev.feature_character_list.domain.model.Character
-import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).

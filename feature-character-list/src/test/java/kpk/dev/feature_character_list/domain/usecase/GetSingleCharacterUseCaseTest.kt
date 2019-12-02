@@ -7,8 +7,6 @@ import io.reactivex.Single
 import kpk.dev.feature_character_list.character
 import kpk.dev.feature_character_list.domain.repository.ICharacterRepository
 import org.junit.Before
-
-import org.junit.Assert.*
 import org.junit.Test
 
 class GetSingleCharacterUseCaseTest {

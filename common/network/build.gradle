@@ -12,3 +12,7 @@ dependencies {
         add(it.config.value, it.dependency)
     }
 }
+
+repositories {
+    google()
+}

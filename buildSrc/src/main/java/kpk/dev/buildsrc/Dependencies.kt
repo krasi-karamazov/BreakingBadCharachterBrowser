@@ -25,40 +25,38 @@ object DependenciesVersions {
     const val targetSdk = 29
 
     const val appcompat = "1.1.0"
-    const val design = "1.0.0"
+    const val design = "1.2.0-alpha02"
     const val cardview = "1.0.0"
-    const val recyclerview = "1.0.0"
+    const val recyclerview = "1.1.0"
     const val constraintLayout = "2.0.0-beta2"
 
-    const val ktx = "1.0.0-alpha1"
+    const val ktx = "1.2.0-rc01"
 
-    const val kotlin = "1.3.41"
-    const val timber = "4.7.1"
+    const val kotlin = "1.3.61"
     const val rxjava = "2.2.15"
     const val rxkotlin = "2.4.0"
     const val rxPaper = "1.4.0"
     const val retrofit = "2.6.2"
     const val loggingInterceptor = "4.0.0"
-    const val glide = "4.9.0"
-    const val okHttp = "4.2.1"
+    const val glide = "4.10.0"
+    const val okHttp = "4.2.2"
 
-    const val dagger = "2.23.1"
+    const val dagger = "2.25.2"
     const val javaxInject = "1"
 
     const val moshi = "1.9.2"
-    const val lifecycle = "2.0.0"
-    const val leakCanary = "2.0-alpha-2"
+    const val lifecycle = "2.2.0-rc02"
 
-    const val junit = "4.12"
-    const val assertjCore = "3.12.2"
-    const val mockitoKotlin = "2.1.0"
+    const val junit = "4.13-rc-2"
+    const val assertjCore = "3.14.0"
+    const val mockitoKotlin = "2.2.0"
     const val mockitoInline = "3.2.0"
+    const val archCoreTesting = "2.1.0"
 }
 
 object Libs {
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${DependenciesVersions.kotlin}"
     const val ktx = "androidx.core:core-ktx:${DependenciesVersions.ktx}"
-    const val timber = "com.jakewharton.timber:timber:${DependenciesVersions.timber}"
     const val retrofit = "com.squareup.retrofit2:retrofit:${DependenciesVersions.retrofit}"
     const val rxjavaAdapter = "com.squareup.retrofit2:adapter-rxjava2:${DependenciesVersions.retrofit}"
     const val moshiConverter = "com.squareup.retrofit2:converter-moshi:${DependenciesVersions.retrofit}"
@@ -67,7 +65,6 @@ object Libs {
     const val glideCompiler = "com.github.bumptech.glide:compiler:${DependenciesVersions.glide}"
     const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${DependenciesVersions.lifecycle}"
     const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:${DependenciesVersions.lifecycle}"
-    const val leakCanaryAndroid = "com.squareup.leakcanary:leakcanary-android:${DependenciesVersions.leakCanary}"
     const val dagger = "com.google.dagger:dagger:${DependenciesVersions.dagger}"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${DependenciesVersions.dagger}"
     const val daggerAndroid = "com.google.dagger:dagger-android:${DependenciesVersions.dagger}"
@@ -97,7 +94,7 @@ object TestLibs {
     const val assertjCore = "org.assertj:assertj-core:${DependenciesVersions.assertjCore}"
     const val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${DependenciesVersions.mockitoKotlin}"
     const val mockitoInline = "org.mockito:mockito-inline:${DependenciesVersions.mockitoInline}"
-    const val lifecycleTesting = "androidx.arch.core:core-testing:${DependenciesVersions.lifecycle}"
+    const val lifecycleTesting = "androidx.arch.core:core-testing:${DependenciesVersions.archCoreTesting}"
 }
 
 object MainAppDependencies {

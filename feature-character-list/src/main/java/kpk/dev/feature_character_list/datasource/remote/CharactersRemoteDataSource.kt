@@ -6,7 +6,7 @@ import kpk.dev.feature_character_list.datasource.model.mapEntityToDomain
 import kpk.dev.feature_character_list.domain.model.Character
 import javax.inject.Inject
 
-class CharactersRemoteDataSource @Inject constructor(val api: BreakingBadCharacterApi): ICharactersRemoteDataSource {
+class CharactersRemoteDataSource @Inject constructor(private val api: BreakingBadCharacterApi): ICharactersRemoteDataSource {
 
     override fun getCharacterList(): Single<List<Character>> =
         api.getCharacterList().map { it.mapEntityToDomain() }

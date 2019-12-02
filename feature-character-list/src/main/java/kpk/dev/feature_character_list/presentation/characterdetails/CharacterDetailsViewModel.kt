@@ -15,7 +15,7 @@ import kpk.dev.presentation.setSuccess
 import javax.inject.Inject
 
 class CharacterDetailsViewModel @Inject constructor(
-    val charactersListUseCase: GetSingleCharacterUseCase,
+    private val charactersListUseCase: GetSingleCharacterUseCase,
     disposable: CompositeDisposable
 ) : BaseViewModel(disposable) {
 

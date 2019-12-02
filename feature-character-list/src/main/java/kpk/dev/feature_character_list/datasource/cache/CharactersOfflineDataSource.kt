@@ -7,8 +7,8 @@ import kpk.dev.feature_character_list.data.datasource.ICharactersOfflineDataSour
 import kpk.dev.feature_character_list.domain.model.Character
 import javax.inject.Inject
 
-class CharactersOfflineDataSource @Inject constructor(val cache: PaperCache<List<Character>>): ICharactersOfflineDataSource {
-    val key = "characters"
+class CharactersOfflineDataSource @Inject constructor(private val cache: PaperCache<List<Character>>): ICharactersOfflineDataSource {
+    private val key = "characters"
 
     override fun getCharacterList(): Single<List<Character>> = cache.get(key)
 
@@ -22,9 +22,9 @@ class CharactersOfflineDataSource @Inject constructor(val cache: PaperCache<List
         cache.get(key).toObservable()
             .map { it -> it.filter { it.name.contains(name, true) } }
 
-    override fun filterCharactersBySeasonApperances(appearances: List<Int>): Single<Character> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun filterCharactersBySeasonApperances(appearances: List<Int>): Observable<List<Character>> =
+        cache.get(key).toObservable()
+            .map { it -> it.filter { it.appearance.containsAll(appearances) } }
 
     override fun putCharacter(character: Character): Single<Character> = cache.get(key)
         .flatMap {

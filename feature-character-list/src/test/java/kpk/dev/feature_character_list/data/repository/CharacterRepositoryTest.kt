@@ -27,13 +27,18 @@ class CharacterRepositoryTest {
 
     @Before
     fun setUp() {
-        repository = CharacterRepository(mockCharacterRemoteDataSource, mockCharacterOfflineDataSource)
+        repository =
+            CharacterRepository(mockCharacterRemoteDataSource, mockCharacterOfflineDataSource)
     }
 
     //Character list tests
     @Test
     fun `get characters list from cache is success`() {
-        whenever(mockCharacterOfflineDataSource.getCharacterList()).thenReturn(Single.just(cachedDataList))
+        whenever(mockCharacterOfflineDataSource.getCharacterList()).thenReturn(
+            Single.just(
+                cachedDataList
+            )
+        )
 
         val testResult = repository.getCharacterList(false).test()
 
@@ -44,8 +49,16 @@ class CharacterRepositoryTest {
     @Test
     fun `get characters list from cache is failure, time to download to success`() {
         whenever(mockCharacterOfflineDataSource.getCharacterList()).thenReturn(Single.error(error))
-        whenever(mockCharacterRemoteDataSource.getCharacterList()).thenReturn(Single.just(remoteDataList))
-        whenever(mockCharacterOfflineDataSource.putCharacterList(remoteDataList)).thenReturn(Single.just(remoteDataList))
+        whenever(mockCharacterRemoteDataSource.getCharacterList()).thenReturn(
+            Single.just(
+                remoteDataList
+            )
+        )
+        whenever(mockCharacterOfflineDataSource.putCharacterList(remoteDataList)).thenReturn(
+            Single.just(
+                remoteDataList
+            )
+        )
 
         val testResult = repository.getCharacterList(false).test()
 
@@ -57,8 +70,16 @@ class CharacterRepositoryTest {
 
     @Test
     fun `get characters list from remote is success`() {
-        whenever(mockCharacterRemoteDataSource.getCharacterList()).thenReturn(Single.just(remoteDataList))
-        whenever(mockCharacterOfflineDataSource.putCharacterList(remoteDataList)).thenReturn(Single.just(remoteDataList))
+        whenever(mockCharacterRemoteDataSource.getCharacterList()).thenReturn(
+            Single.just(
+                remoteDataList
+            )
+        )
+        whenever(mockCharacterOfflineDataSource.putCharacterList(remoteDataList)).thenReturn(
+            Single.just(
+                remoteDataList
+            )
+        )
 
         val testResult = repository.getCharacterList(true).test()
 
@@ -81,7 +102,11 @@ class CharacterRepositoryTest {
     //Single character test
     @Test
     fun `get single character from cache is success`() {
-        whenever(mockCharacterOfflineDataSource.getCharacter(24)).thenReturn(Single.just(cachedDataItem))
+        whenever(mockCharacterOfflineDataSource.getCharacter(24)).thenReturn(
+            Single.just(
+                cachedDataItem
+            )
+        )
 
         val testResult = repository.getCharacter(24, false).test()
 
@@ -93,10 +118,18 @@ class CharacterRepositoryTest {
     @Test
     fun `get single character from cache is failure, time to download to success`() {
         whenever(mockCharacterOfflineDataSource.getCharacter(24)).thenReturn(Single.error(error))
-        whenever(mockCharacterRemoteDataSource.getCharacter(24)).thenReturn(Single.just(remoteDataItem))
-        whenever(mockCharacterOfflineDataSource.putCharacter(remoteDataItem)).thenReturn(Single.just(remoteDataItem))
+        whenever(mockCharacterRemoteDataSource.getCharacter(24)).thenReturn(
+            Single.just(
+                remoteDataItem
+            )
+        )
+        whenever(mockCharacterOfflineDataSource.putCharacter(remoteDataItem)).thenReturn(
+            Single.just(
+                remoteDataItem
+            )
+        )
 
-        val testResult = repository.getCharacter(24,false).test()
+        val testResult = repository.getCharacter(24, false).test()
 
         verify(mockCharacterOfflineDataSource).getCharacter(24)
         verify(mockCharacterRemoteDataSource).getCharacter(24)
@@ -106,8 +139,16 @@ class CharacterRepositoryTest {
 
     @Test
     fun `get single character from remote is success`() {
-        whenever(mockCharacterRemoteDataSource.getCharacter(24)).thenReturn(Single.just(remoteDataItem))
-        whenever(mockCharacterOfflineDataSource.putCharacter(remoteDataItem)).thenReturn(Single.just(remoteDataItem))
+        whenever(mockCharacterRemoteDataSource.getCharacter(24)).thenReturn(
+            Single.just(
+                remoteDataItem
+            )
+        )
+        whenever(mockCharacterOfflineDataSource.putCharacter(remoteDataItem)).thenReturn(
+            Single.just(
+                remoteDataItem
+            )
+        )
 
         val testResult = repository.getCharacter(24, true).test()
 

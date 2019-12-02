@@ -9,7 +9,7 @@ import kpk.dev.feature_character_list.presentation.model.CharacterItem
 import kpk.dev.presentation.inflate
 import kpk.dev.presentation.loadImage
 
-class CharactersAdapter(val listener: (Int) -> Unit) :
+class CharactersAdapter(private val listener: (Int) -> Unit) :
     RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder>() {
 
     private val charList = mutableListOf<CharacterItem>()

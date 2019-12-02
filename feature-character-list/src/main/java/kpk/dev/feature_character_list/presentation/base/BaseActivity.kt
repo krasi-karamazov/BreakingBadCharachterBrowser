@@ -39,15 +39,11 @@ abstract class BaseActivity: AppCompatActivity() {
     }
 
     protected fun showProgress() {
-        progressBar?.let {
-            it.visible()
-        }
+        progressBar?.visible()
     }
 
     protected fun hideProgress() {
-        progressBar?.let {
-            it.gone()
-        }
+        progressBar?.gone()
     }
 
     protected fun displayError(

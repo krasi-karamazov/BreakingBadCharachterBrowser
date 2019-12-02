@@ -13,7 +13,7 @@ import org.junit.Test
 
 class CharactersOfflineDataSourceTest {
 
-    val key = "characters"
+    private val key = "characters"
 
     private lateinit var dataSource: ICharactersOfflineDataSource
     private val mockPaperCache: PaperCache<List<Character>> = mock()
@@ -23,6 +23,20 @@ class CharactersOfflineDataSourceTest {
 
     private val cachedDataList = listOf(cachedDataItem)
     private val remoteDataList = listOf(remoteDataItem)
+
+    private val searchDataItemWalter = character.copy(name = "Walter")
+    private val searchDataItemJesse = character.copy(name = "Jesse")
+    private val searchDataItemMarie = character.copy(name = "Marie")
+    private val searchDataItemWalterJr = character.copy(name = "Walter Jr")
+
+    private val searchList = listOf(searchDataItemWalter, searchDataItemJesse, searchDataItemMarie, searchDataItemWalterJr)
+
+    private val filterDataItemSeasons123 = character.copy(name = "Person 1", appearance = listOf(1, 2, 3))
+    private val filterDataItemSeasons234 = character.copy(name = "Person 2", appearance = listOf(2, 3, 4))
+    private val filterDataItemSeasons1 = character.copy(name = "Person 3", appearance = listOf(1))
+    private val filterDataItemSeasons45 = character.copy(name = "Person 4", appearance = listOf(4, 5))
+
+    private val filterList = listOf(filterDataItemSeasons123, filterDataItemSeasons234, filterDataItemSeasons1, filterDataItemSeasons45)
 
     private val error = Throwable()
 
@@ -109,5 +123,77 @@ class CharactersOfflineDataSourceTest {
         val test = dataSource.putCharacter(remoteDataItem).test()
         verify(mockPaperCache).get(key)
         test.assertError(error)
+    }
+
+    //Search tests
+    @Test
+    fun `search characters by partial name`() {
+        whenever(mockPaperCache.get(key)).thenReturn(Single.just(searchList))
+
+        val test = dataSource.searchForCharactersByName("wa").test()
+
+        verify(mockPaperCache).get(key)
+        test.assertValue(listOf(searchDataItemWalter, searchDataItemWalterJr))
+    }
+
+    @Test
+    fun `search characters by full name`() {
+        whenever(mockPaperCache.get(key)).thenReturn(Single.just(searchList))
+
+        val test = dataSource.searchForCharactersByName("Jesse").test()
+
+        verify(mockPaperCache).get(key)
+        test.assertValue(listOf(searchDataItemJesse))
+    }
+
+    @Test
+    fun `search characters fail to empty`() {
+        whenever(mockPaperCache.get(key)).thenReturn(Single.just(searchList))
+
+        val test = dataSource.searchForCharactersByName("dfsdfsdf").test()
+
+        verify(mockPaperCache).get(key)
+        test.assertValue(listOf())
+    }
+
+    @Test
+    fun `search characters by empty string to full list`() {
+        whenever(mockPaperCache.get(key)).thenReturn(Single.just(searchList))
+
+        val test = dataSource.searchForCharactersByName("").test()
+
+        verify(mockPaperCache).get(key)
+        test.assertValue(searchList)
+    }
+
+    //Filter tests
+    @Test
+    fun `filter characters for season 1 only return 2 items`() {
+        whenever(mockPaperCache.get(key)).thenReturn(Single.just(filterList))
+
+        val test = dataSource.filterCharactersBySeasonApperances(listOf(1)).test()
+
+        verify(mockPaperCache).get(key)
+        test.assertValue(listOf(filterDataItemSeasons123, filterDataItemSeasons1))
+    }
+
+    @Test
+    fun `filter characters for season 1 2 3 return 1 item`() {
+        whenever(mockPaperCache.get(key)).thenReturn(Single.just(filterList))
+
+        val test = dataSource.filterCharactersBySeasonApperances(listOf(1, 2, 3)).test()
+
+        verify(mockPaperCache).get(key)
+        test.assertValue(listOf(filterDataItemSeasons123))
+    }
+
+    @Test
+    fun `filter characters for season 2 3 return 2 item`() {
+        whenever(mockPaperCache.get(key)).thenReturn(Single.just(filterList))
+
+        val test = dataSource.filterCharactersBySeasonApperances(listOf(2, 3)).test()
+
+        verify(mockPaperCache).get(key)
+        test.assertValue(listOf(filterDataItemSeasons123, filterDataItemSeasons234))
     }
 }
