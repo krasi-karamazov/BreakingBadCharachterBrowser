@@ -8,7 +8,9 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.Chip
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_character_list.*
 import kpk.dev.feature_character_list.R
 import kpk.dev.feature_character_list.presentation.base.BaseActivity
 import kpk.dev.feature_character_list.presentation.characterdetails.CharacterDetailsActivity
@@ -34,6 +36,10 @@ class CharacterListActivity: BaseActivity() {
         findViewById<FloatingActionButton>(R.id.fab)
     }
 
+    private val filterChip: Chip by lazy {
+        findViewById<Chip>(R.id.filter_chip)
+    }
+
     private lateinit var seasonsArray: IntArray
 
     private val searchObserver = Observer<Resource<List<CharacterItem>>> {
@@ -42,6 +48,7 @@ class CharacterListActivity: BaseActivity() {
             ResourceState.SUCCESS -> {
                 hideError()
                 charactersAdapter.updateData(it.data)
+                rv_characters.smoothScrollToPosition(0)
             }
         }
     }
@@ -54,6 +61,7 @@ class CharacterListActivity: BaseActivity() {
             ResourceState.SUCCESS -> {
                 hideError()
                 charactersAdapter.updateData(it.data)
+                rv_characters.smoothScrollToPosition(0)
             }
         }
     }
@@ -73,7 +81,7 @@ class CharacterListActivity: BaseActivity() {
     override fun init() {
         setToolBar(findViewById(R.id.toolbar))
         setTitle(getString(R.string.app_title))
-
+        filterChip.text = getString(R.string.all_chars)
         seasonsArray = resources.getIntArray(R.array.seasonsInts)
 
         viewModel = vmFactory.get()
@@ -104,7 +112,10 @@ class CharacterListActivity: BaseActivity() {
                             appearanceList.add(seasonsArray[it.keyAt(i)])
                         }
                     }
+                    filterChip.text =
+                        getString(R.string.seasons_appearance, appearanceList.joinToString())
                 } else {
+                    filterChip.text = getString(R.string.all_chars)
                     viewModel.appliedFilter.fill(false)
                 }
                 viewModel.filterCharactersBySeasonAppearance(appearanceList)
@@ -129,6 +140,7 @@ class CharacterListActivity: BaseActivity() {
                     hideError()
                     hideProgress()
                     charactersAdapter.updateData(it.data)
+                    rv_characters.smoothScrollToPosition(0)
                 }
             }
         })

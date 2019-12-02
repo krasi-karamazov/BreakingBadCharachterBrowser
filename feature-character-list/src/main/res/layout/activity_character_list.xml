@@ -22,10 +22,27 @@
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_characters"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/filter_chip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checkable="false"
+                android:enabled="false"
+                style="@style/Widget.MaterialComponents.Chip.Filter" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_characters"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/filter_chip"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+
 
         <ProgressBar
             android:id="@+id/pb_char_list"
@@ -42,6 +59,7 @@
         android:src="@drawable/ic_filter_list_white_24dp"
         android:contentDescription="@string/filter_list"
         android:layout_margin="16dp"
-        style="@style/Widget.Design.FloatingActionButton" />
+        app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior"
+        style="@style/Widget.MaterialComponents.FloatingActionButton" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

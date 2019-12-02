@@ -27,6 +27,7 @@ object DependenciesVersions {
     const val appcompat = "1.1.0"
     const val design = "1.2.0-alpha02"
     const val cardview = "1.0.0"
+    const val material = "1.1.0-beta02"
     const val constraintLayout = "2.0.0-beta2"
 
     const val ktx = "1.2.0-rc01"
@@ -77,6 +78,7 @@ object Libs {
 
     const val moshi = "com.squareup.moshi:moshi:${DependenciesVersions.moshi}"
     const val moshiCodeGen = "com.squareup.moshi:moshi-kotlin-codegen:${DependenciesVersions.moshi}"
+    const val material = "com.google.android.material:material:${DependenciesVersions.material}"
 }
 
 object SupportLibs {
@@ -109,7 +111,8 @@ object MainAppDependencies {
         DependecyConfiguration(ConfigurationType.KAPT, Libs.daggerAndroidProcessor),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.javaXInject),
         DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.kotlin),
-        DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.ktx)
+        DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.ktx),
+        DependecyConfiguration(ConfigurationType.IMPLEMENTATION, Libs.material)
     )
 
     val testDependencies = listOf(

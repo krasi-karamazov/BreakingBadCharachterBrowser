@@ -19,4 +19,6 @@
     <string name="filter_title">Filter characters by season appearance</string>
     <string name="search_error">An error occurred while searching</string>
     <string name="filter_error">An error occurred while filtering</string>
+    <string name="seasons_appearance">Characters appearing in seasons %1$s</string>
+    <string name="all_chars">All characters</string>
 </resources>
