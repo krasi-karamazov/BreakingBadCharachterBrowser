@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import kpk.dev.feature_character_list.R
 import kpk.dev.feature_character_list.presentation.base.BaseActivity
 import kpk.dev.feature_character_list.presentation.characterdetails.CharacterDetailsActivity
+import kpk.dev.feature_character_list.presentation.model.CharacterItem
 import kpk.dev.feature_character_list.presentation.viewmodelfactory.ViewModelFactory
+import kpk.dev.presentation.Resource
 import kpk.dev.presentation.ResourceState
 import javax.inject.Inject
 
@@ -25,6 +27,19 @@ class CharacterListActivity: BaseActivity() {
     private val charactersRecyclerView: RecyclerView by lazy {
         findViewById<RecyclerView>(R.id.rv_characters)
     }
+
+    private val searchObserver = Observer<Resource<List<CharacterItem>>> {
+        when (it.resourceState) {
+            ResourceState.FAILURE -> {
+                displayError(it.message, getString(R.string.try_again)) { downloadData() }
+            }
+            ResourceState.SUCCESS -> {
+                hideError()
+                charactersAdapter.updateData(it.data)
+            }
+        }
+    }
+
     private val charactersAdapter: CharactersAdapter by lazy {
         CharactersAdapter {
             val intent =
@@ -90,7 +105,16 @@ class CharacterListActivity: BaseActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                TODO("Handle text change and search for string in name")
+                newText?.let {
+                    if (it.length >= 2) {
+                        viewModel.searchForCharacterByName(it)
+                            .observe(this@CharacterListActivity, searchObserver)
+                    } else {
+                        if (it.isEmpty() || it.length == 1) {
+                            downloadData()
+                        }
+                    }
+                }
                 return false
             }
 

@@ -1,5 +1,6 @@
 package kpk.dev.feature_character_list.data.repository
 
+import io.reactivex.Observable
 import io.reactivex.Single
 import kpk.dev.feature_character_list.data.datasource.ICharactersOfflineDataSource
 import kpk.dev.feature_character_list.data.datasource.ICharactersRemoteDataSource
@@ -34,5 +35,10 @@ class CharacterRepository(
                     .onErrorResumeNext { getCharacter(id, true) }
             }
         }
+    }
+
+    override fun searchForCharactersByName(name: String): Observable<List<Character>> {
+        return charactersOfflineDataSource.searchForCharactersByName(name)
+            .onErrorResumeNext(getCharacterList(false).toObservable())
     }
 }
